@@ -1,0 +1,33 @@
+###**_QUESTION_**
+Given a string s and an array of strings words, return the number of words[i] that is a subsequence of s.
+
+A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
+
+For example, "ace" is a subsequence of "abcde".
+
+###**_SOLUTION_**
+int numMatchingSubseq(string s, vector<string>& words) {
+    int total =0, k=s.size();
+    unordered_map<string,int>stringmap;
+    for(int i=0;i<words.size();i++){
+        stringmap[words[i]]++;
+    }
+    for(auto st: stringmap){
+       int index1=0,index2=0;
+        string m=st.first;
+        int p=m.size();
+        while(index1<k&&index2<p){
+            if(s[index1]==m[index2]){
+                index1++;
+                index2++;
+            }
+            else{
+                index1++;
+            }
+        }
+        if(index2==p){
+            total+=st.second;
+        }
+    }
+    return total;
+}
